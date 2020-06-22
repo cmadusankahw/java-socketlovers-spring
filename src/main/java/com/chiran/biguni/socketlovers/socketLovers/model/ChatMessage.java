@@ -1,5 +1,10 @@
 package com.chiran.biguni.socketlovers.socketLovers.model;
 
+
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Collections;
+
 public class ChatMessage {
     private MessageType type;
     private String content;
@@ -11,6 +16,22 @@ public class ChatMessage {
         QUIT
     }
 
+    public static String encrypt(String msg){
+        String key = "1234dfrghtjkGHJR";
+        msg = new StringBuilder(new String(msg)).reverse().toString();
+        msg = key + msg;
+        System.out.println("Encrypted :" + msg);
+        return msg;
+    }
+
+    public static String decrypt(String msg){
+        String key = "1234dfrghtjkGHJR";
+        msg = msg.replace(key,"");
+        msg = new StringBuilder(new String(msg)).reverse().toString();
+        System.out.println("Decrypted :" + msg);
+        return msg;
+    }
+
     public MessageType getType() {
         return type;
     }
@@ -19,11 +40,15 @@ public class ChatMessage {
         this.type = type;
     }
 
-    public String getContent() {
-        return content;
+    public String getContent() throws Exception {
+        if (this.content != null ) {
+        this.content = decrypt(content); }
+        return this.content;
     }
 
-    public void setContent(String content) {
+    public void setContent(String content) throws Exception {
+        if (content != null ) {
+        content = encrypt(content); }
         this.content = content;
     }
 
