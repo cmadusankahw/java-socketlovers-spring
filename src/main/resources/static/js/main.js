@@ -51,13 +51,22 @@ function onError(error) {
     connectingElement.style.color = 'red';
 }
 
+function encrypt(msg){
+    var key = "1234dfrghtjkGHJR";
+    var splitString = msg.split("");
+    var reverseArray = splitString.reverse();
+    var joinArray = reverseArray.join("");
+    msg = key + joinArray;
+    console.log("Encrypted :" + msg);
+    return msg;
+}
 
 function sendMessage(event) {
-    var messageContent = messageInput.value.trim();
+    var messageContent = messageInput.value.trim() ;
     if(messageContent && stompClient) {
         var chatMessage = {
             sender: username,
-            content: messageInput.value,
+            content: encrypt(messageInput.value),
             type: 'CHAT'
         };
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));

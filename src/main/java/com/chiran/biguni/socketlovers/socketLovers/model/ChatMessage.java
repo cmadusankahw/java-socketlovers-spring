@@ -16,13 +16,6 @@ public class ChatMessage {
         QUIT
     }
 
-    public static String encrypt(String msg){
-        String key = "1234dfrghtjkGHJR";
-        msg = new StringBuilder(new String(msg)).reverse().toString();
-        msg = key + msg;
-        System.out.println("Encrypted :" + msg);
-        return msg;
-    }
 
     public static String decrypt(String msg){
         String key = "1234dfrghtjkGHJR";
@@ -47,8 +40,6 @@ public class ChatMessage {
     }
 
     public void setContent(String content) throws Exception {
-        if (content != null ) {
-        content = encrypt(content); }
         this.content = content;
     }
 
